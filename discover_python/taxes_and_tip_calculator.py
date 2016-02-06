@@ -1,6 +1,7 @@
-# Python Workshop price calculator program.
-# Taking input from users about price,
-# taxes and tips and calculating the total.
+""" 
+ Python Workshop price calculator program made by Josquin Gaillard.
+ Taking input from users about price, taxes and tips and calculating the total.
+"""
 
 print "Welcome to the taxes and tip calculator!"
 price = float(input("What is the price before tax? "))
