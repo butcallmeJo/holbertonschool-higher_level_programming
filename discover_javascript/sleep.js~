@@ -1,5 +1,0 @@
-var display = function(){
-    console.log("One more second...");
-}
-setInterval(display, 60);
-console.log("This comes at the end of the file.");
