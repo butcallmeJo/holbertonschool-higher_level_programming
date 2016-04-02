@@ -6,6 +6,7 @@ request_headers = {
   'Authorization': 'token fffa38b10948aa7eff293682308672bc95672ae3'
 }
 
-r = requests.get(url, headers = request_headers)
+#creating a variable with the response of request
+r = requests.get(url = url, headers = request_headers)
 
 print r.content
