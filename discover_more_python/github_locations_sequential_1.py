@@ -18,7 +18,7 @@ users = [{
 
 #adding the location from the users github api's page
 for u in users:
-    print "test"
+    # print "test"
     loc_url = "https://api.github.com/users/" + u['user']
     location_r = requests.get(url = loc_url, headers = request_headers)
     u['location'] = location_r.json()['location']
@@ -28,19 +28,3 @@ print json.dumps([{
     'full_name': str(user['full_name']),
     'location': str(user['location'])
 } for user in users])
-
-# print json.dumps({
-#     'location': loc['location'],
-#     'full_name': loc['full_name']
-#     } for loc in users)
-
-# data = [{
-#     'user': u['owner']['login'],
-#     'name': u['full_name']
-# } for u in r.json()['items']]
-
-# for d in data:
-#     loc_url = "https://api.github.com/users/" + d['user']
-#     location_r = requests.get(url = loc_url, headers = request_headers)
-#     d['location'] = location_r.json()['location']
-#     print json.dumps(d['location']) #not working exactly
