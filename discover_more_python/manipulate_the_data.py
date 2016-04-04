@@ -15,7 +15,5 @@ data = json.loads(r.text)
 for v in data['items']:
     print v[u'full_name']
 
-
-
 #print data['items'][][u'full_name']
 #print data["items"]["full_name"]

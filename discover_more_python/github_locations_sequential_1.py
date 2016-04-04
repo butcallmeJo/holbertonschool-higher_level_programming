@@ -9,23 +9,25 @@ request_headers = {
 #creating a variable with the response of request
 r = requests.get(url = url, headers = request_headers)
 data = json.loads(r.text)
-answer = []
 
+#creating a list of dictionaries of users
 users = [{
     'user': i['owner']['login'],
     'full_name': i['full_name']
 } for i in data['items']]
 
+#adding the location from the users github api's page
 for u in users:
+    print "test"
     loc_url = "https://api.github.com/users/" + u['user']
     location_r = requests.get(url = loc_url, headers = request_headers)
     u['location'] = location_r.json()['location']
-    answer.append({
-        'full_name': u['full_name'],
-        'location': u['location']
-        })
 
-print json.dumps(answer)
+#printing a list of dictionaries with the names and locations
+print json.dumps([{
+    'full_name': str(user['full_name']),
+    'location': str(user['location'])
+} for user in users])
 
 # print json.dumps({
 #     'location': loc['location'],
