@@ -1,4 +1,5 @@
 # Program that describes a circle with attributes.
+import math
 
 class Circle():
 
@@ -23,3 +24,11 @@ class Circle():
 	def area(self):
 		#calculates the area of circle
 		return 3.14*self.__radius*self.__radius
+
+	def intersection(self, c_bis):
+		#finds if self intersects with c_bis
+		distance = math.sqrt(abs(self.__center[0] - c_bis.__center[0]) + abs(self.__center[1] - c_bis.__center[1]))
+		if distance < self.__radius:
+			return True
+		else:
+			return False
