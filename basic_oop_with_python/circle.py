@@ -1,8 +1,12 @@
-# Program that describes a circle with attributes.
+'''# Program that describes a circle with attributes.'''
 import math
 
 class Circle():
-
+	'''
+	Circle is a class that defines radius, center, color, name
+	and calculates area of circle, finds intersection if 2 circles
+	are called.
+	'''
 	def __init__(self, radius):
 		self.__radius = radius
 		self.__color = "white"

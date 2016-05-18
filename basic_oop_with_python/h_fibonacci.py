@@ -1,4 +1,4 @@
-# Program w/ func that computes the fibonacci number of the parameter.
+'''# Program w/ func that computes the fibonacci number of the parameter.'''
 
 def fibonacci(x):
 	a,b = 1,1

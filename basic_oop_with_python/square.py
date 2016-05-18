@@ -1,8 +1,9 @@
-# Program that describes a circle with attributes.
-import math
-
+'''# Program that describes a square with attributes.'''
 class Square():
-
+	'''
+	Square defines a square by its side length, color, center
+	and calculates its area as well as prints a square made of '*'
+	'''
 	def __init__(self, side_length):
 		self.__side_length = side_length
 		self.__color = "white"
@@ -28,7 +29,7 @@ class Square():
 		#calculates the area of square
 		return self.__side_length ** 2
 
-	def prints(self):
+	def print_s(self):
 		for i in range(self.__side_length):
 			for j in range(self.__side_length):
 				if (i == 0 or i == self.__side_length-1) and j != self.__side_length-1:
