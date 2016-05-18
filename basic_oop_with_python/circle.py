@@ -5,6 +5,9 @@ class Circle():
 
 	def __init__(self, radius):
 		self.__radius = radius
+		self.__color = "white"
+		self.__center = [0, 0]
+		self.name = "circle"
 
 	def __del__(self):
 		pass
