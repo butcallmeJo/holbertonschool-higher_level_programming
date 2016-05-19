@@ -13,6 +13,7 @@ class Person():
 			raise Exception("id is not an integer")
 		if first_name == None or not isinstance( first_name, str ):
 			raise Exception("string is not a string")
+		'''ERROR. REDO'''
 		if not (isinstance( i , int ) for item in date_of_birth):
 			raise Exception("date_of_birth is not a valid date")
 		if not isinstance( genre, str ) or genre not in self.GENRES:
