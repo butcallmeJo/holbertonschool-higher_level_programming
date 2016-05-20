@@ -1,6 +1,6 @@
 from square import Square
 
-s = Square(20)
+s = Square(7)
 s.set_center([0, 0])
 s.set_color("Yellow")
 s.name = "Hally"
