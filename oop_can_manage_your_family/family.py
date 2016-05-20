@@ -50,13 +50,13 @@ class Person():
 		return age_var
 
 	def json(self):
-		json = {'id': self.__id,
+		dicc = {'id': self.__id,
 		'eyes_color': self.__eyes_color,
 		'genre': self.__genre,
 		'date_of_birth': self.__date_of_birth,
 		'first_name': self.__first_name,
 		'last_name': self.last_name}
-		return json
+		return dicc
 
 	def load_from_json(self, json):
 		if not isinstance(json, dict):
@@ -171,12 +171,24 @@ class Senior(Person):
 		return isinstance(self, Senior) or isinstance(self, Adult)
 
 def save_to_file(list, filename):
-	file = open(filename, 'w+')
-	file.write(list)
-	file.close()
+	list_of_json_strs = []
+	with open(filename, 'w'):
+		for i in list:
+			list_of_json_strs.append(i.json())
+		json.dump(list_of_json_strs, filename)
+	# file = open(filename, 'w+')
+	# file.write(list)
+	# file.close()
 
 def load_from_file(filename):
 	if not isinstance(filename, str) or not os.path.isfile(filename):
 		raise Exception("filename is not valid or doesn't exist")
-	file = open(filename, 'r')
-	return file.read()
+	else:
+		with open(filename, 'wr') as datafile:
+			data = json.load(datafile)
+			Persons = []
+			for d in data:
+				p = Person(0, "Jo", [6,7,1992], "Male", "Brown")
+				p.load_from_json(d)
+				Persons.append(p)
+			return Persons
