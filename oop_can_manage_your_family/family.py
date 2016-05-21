@@ -29,6 +29,7 @@ class Person():
 		self.__first_name = first_name
 		self.last_name = "last_name"
 		self.kind = self.__class__.__name__
+		self.is_married_to = 0
 
 	def __del__(self):
 		pass
@@ -56,6 +57,9 @@ class Person():
 		else:
 			return self.__class__.__name__
 
+	def get_id(self):
+		return self.__id
+
 	def json(self):
 		dicc = {'id': self.__id,
 		'first_name': self.__first_name,
@@ -63,7 +67,8 @@ class Person():
 		'kind': self.get_kind(),
 		'genre': self.__genre,
 		'date_of_birth': self.__date_of_birth,
-		'eyes_color': self.__eyes_color}
+		'eyes_color': self.__eyes_color,
+		'is_married_to': self.is_married_to}
 		return dicc
 
 	def load_from_json(self, json):
@@ -76,6 +81,7 @@ class Person():
 		self.__genre = str(json['genre'])
 		self.__date_of_birth = str(json['date_of_birth'])
 		self.__eyes_color = str(json['eyes_color'])
+		self.is_married_to = str(json['is_married_to'])
 
 
 
@@ -119,6 +125,22 @@ class Baby(Person):
 	def can_vote(self):
 		return isinstance(self, Senior) or isinstance(self, Adult)
 
+	def can_be_married(self):
+		return isinstance(self, Senior) or isinstance(self, Adult)
+
+	def is_married(self):
+		if self.is_married_to != 0:
+			return True
+
+	def divorce(self, p):
+		self.is_married_to = 0
+		p.is_married_to = 0
+
+	def just_married_with(self, p):
+		#TODO exceptions
+		self.is_married_to = p.get_id
+		p.is_married_to = self.get_id
+
 class Teenager(Person):
 	"""docstring for Teenager"""
 
@@ -139,6 +161,22 @@ class Teenager(Person):
 
 	def can_vote(self):
 		return isinstance(self, Senior) or isinstance(self, Adult)
+
+	def can_be_married(self):
+		return isinstance(self, Senior) or isinstance(self, Adult)
+
+	def is_married(self):
+		if self.is_married_to != 0:
+			return True
+
+	def divorce(self, p):
+		self.is_married_to = 0
+		p.is_married_to = 0
+
+	def just_married_with(self, p):
+		#TODO exceptions
+		self.is_married_to = p.get_id
+		p.is_married_to = self.get_id
 
 class Adult(Person):
 	"""docstring for Adult"""
@@ -161,6 +199,22 @@ class Adult(Person):
 	def can_vote(self):
 		return isinstance(self, Senior) or isinstance(self, Adult)
 
+	def can_be_married(self):
+		return isinstance(self, Senior) or isinstance(self, Adult)
+
+	def is_married(self):
+		if self.is_married_to != 0:
+			return True
+
+	def divorce(self, p):
+		self.is_married_to = 0
+		p.is_married_to = 0
+
+	def just_married_with(self, p):
+		#TODO exceptions
+		self.is_married_to = p.get_id
+		p.is_married_to = self.get_id
+
 class Senior(Person):
 	"""docstring for Senior"""
 
@@ -182,6 +236,22 @@ class Senior(Person):
 	def can_vote(self):
 		return isinstance(self, Senior) or isinstance(self, Adult)
 
+	def can_be_married(self):
+		return isinstance(self, Senior) or isinstance(self, Adult)
+
+	def is_married(self):
+		if self.is_married_to != 0:
+			return True
+
+	def divorce(self, p):
+		self.is_married_to = 0
+		p.is_married_to = 0
+
+	def just_married_with(self, p):
+		#TODO exceptions
+		self.is_married_to = p.get_id
+		p.is_married_to = self.get_id
+
 def save_to_file(list, filename):
 	list_of_json_strs = []
 	with open(filename, 'w') as w_file:
@@ -199,7 +269,14 @@ def load_from_file(filename):
 				raise Exception("json is not valid")
 			Persons = []
 			for d in data:
-				p = Person(0, "Jo", [6,7,1992], "Male", "Brown")
+				if d['kind'] == "Adult":
+					p = Adult(0, "Jo", [6,7,1992], "Male", "Brown")
+				elif d['kind'] == "Senior":
+					p = Senior(0, "Jo", [6,7,1992], "Male", "Brown")
+				elif d['kind'] == "Teenager":
+					p = Teenager(0, "Jo", [6,7,1992], "Male", "Brown")
+				elif d['kind'] == "Baby":
+					p = Baby(0, "Jo", [6,7,1992], "Male", "Brown")
 				p.load_from_json(d)
 				Persons.append(p)
 			return Persons
