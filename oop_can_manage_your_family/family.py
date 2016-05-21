@@ -51,7 +51,10 @@ class Person():
 		return age_var
 
 	def get_kind(self):
-		return self.__class__.__name__
+		if self.kind != None:
+			return self.kind
+		else:
+			return self.__class__.__name__
 
 	def json(self):
 		dicc = {'id': self.__id,
