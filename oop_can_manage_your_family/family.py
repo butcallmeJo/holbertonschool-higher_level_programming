@@ -138,8 +138,8 @@ class Baby(Person):
 
 	def just_married_with(self, p):
 		#TODO exceptions
-		self.is_married_to = p.get_id
-		p.is_married_to = self.get_id
+		self.is_married_to = p.get_id()
+		p.is_married_to = self.get_id()
 
 class Teenager(Person):
 	"""docstring for Teenager"""
@@ -212,8 +212,8 @@ class Adult(Person):
 
 	def just_married_with(self, p):
 		#TODO exceptions
-		self.is_married_to = p.get_id
-		p.is_married_to = self.get_id
+		self.is_married_to = p.get_id()
+		p.is_married_to = self.get_id()
 
 class Senior(Person):
 	"""docstring for Senior"""
@@ -249,8 +249,8 @@ class Senior(Person):
 
 	def just_married_with(self, p):
 		#TODO exceptions
-		self.is_married_to = p.get_id
-		p.is_married_to = self.get_id
+		self.is_married_to = p.get_id()
+		p.is_married_to = self.get_id()
 
 def save_to_file(list, filename):
 	list_of_json_strs = []

@@ -1,1 +1,1 @@
-[{"date_of_birth": "[7, 4, 2000]", "first_name": "test", "last_name": "last_name", "is_married_to": "0", "eyes_color": "Green", "genre": "Male", "id": "12", "kind": "Teenager"}]
+[{"date_of_birth": [7, 4, 1990], "first_name": "Marc", "last_name": "last_name", "is_married_to": 2, "eyes_color": "Green", "genre": "Male", "id": 1, "kind": "Adult"}, {"date_of_birth": [7, 4, 1992], "first_name": "Vaness", "last_name": "last_name", "is_married_to": 1, "eyes_color": "Green", "genre": "Female", "id": 2, "kind": "Adult"}]
