@@ -1,0 +1,1 @@
+[{"first_name": "Tony", "last_name": "Foto", "kind": "Person", "eyes_color": "Green", "date_of_birth": "[7, 4, 2015]", "genre": "Male", "id": "3"}, {"first_name": "Tony", "last_name": "Foto", "kind": "Teenager", "eyes_color": "Green", "date_of_birth": [7, 4, 2015], "genre": "Male", "id": 3}]

@@ -28,6 +28,7 @@ class Person():
 		self.__date_of_birth = date_of_birth
 		self.__first_name = first_name
 		self.last_name = "last_name"
+		self.kind = self.__class__.__name__
 
 	def __del__(self):
 		pass
@@ -49,23 +50,31 @@ class Person():
 		age_var = 2016-self.__date_of_birth[2] - ((5, 20) < (self.__date_of_birth[0], self.__date_of_birth[1]))
 		return age_var
 
+	def get_kind(self):
+		return self.__class__.__name__
+
 	def json(self):
 		dicc = {'id': self.__id,
-		'eyes_color': self.__eyes_color,
+		'first_name': self.__first_name,
+		'last_name': self.last_name,
+		'kind': self.get_kind(),
 		'genre': self.__genre,
 		'date_of_birth': self.__date_of_birth,
-		'first_name': self.__first_name,
-		'last_name': self.last_name}
+		'eyes_color': self.__eyes_color}
 		return dicc
 
 	def load_from_json(self, json):
 		if not isinstance(json, dict):
 			raise Exception("json is not valid")
 		self.__id = str(json['id'])
-		self.__eyes_color = str(json['eyes_color'])
-		self.__genre = str(json['date_of_birth'])
 		self.__first_name = str(json['first_name'])
 		self.last_name = str(json['last_name'])
+		self.kind = str(json['kind'])
+		self.__genre = str(json['genre'])
+		self.__date_of_birth = str(json['date_of_birth'])
+		self.__eyes_color = str(json['eyes_color'])
+
+
 
 	def __gt__(self, other):
 		return self.age() > other.age()
@@ -172,20 +181,19 @@ class Senior(Person):
 
 def save_to_file(list, filename):
 	list_of_json_strs = []
-	with open(filename, 'w'):
+	with open(filename, 'w') as w_file:
 		for i in list:
 			list_of_json_strs.append(i.json())
-		json.dump(list_of_json_strs, filename)
-	# file = open(filename, 'w+')
-	# file.write(list)
-	# file.close()
+		json.dump(list_of_json_strs, w_file)
 
 def load_from_file(filename):
 	if not isinstance(filename, str) or not os.path.isfile(filename):
 		raise Exception("filename is not valid or doesn't exist")
 	else:
-		with open(filename, 'wr') as datafile:
+		with open(filename, 'r') as datafile:
 			data = json.load(datafile)
+			if data == None:
+				raise Exception("json is not valid")
 			Persons = []
 			for d in data:
 				p = Person(0, "Jo", [6,7,1992], "Male", "Brown")
