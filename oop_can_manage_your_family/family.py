@@ -188,9 +188,9 @@ class Baby(Person):
 		'''return true if person can have child'''
 		return isinstance(self, Adult)
 
-	def has_child_with(self, p, id, first_name, date_of_birth, genre, eyes_color):
+	def has_child_with(self, p, id, first_name, date_of_birth, genre, eyes_color = ''):
 		'''return a new baby based on parents'''
-		if p is None or not (p.get_kind() == "Adult") or not (p.get_kind() == "Senior"):
+		if p is None or not (p.get_kind() == "Adult" or p.get_kind() == "Senior"):
 			raise Exception("p is not an Adult of Senior")
 		if id < 0 or not isinstance(id, int):
 			raise Exception("id is not an integer")
@@ -203,7 +203,7 @@ class Baby(Person):
 		if not self.can_have_child() or not p.can_have_child():
 			raise Exception("Can't have baby")
 
-		if eyes_color == None:
+		if eyes_color == '':
 			if self.get_eyes_color() == "Brown" or p.get_eyes_color() == "Brown":
 				eyes_color = "Brown"
 			elif self.get_eyes_color() == "Blue" and p.get_eyes_color() == "Blue":
@@ -285,9 +285,9 @@ class Teenager(Person):
 		'''return true if person can have child'''
 		return isinstance(self, Adult)
 
-	def has_child_with(self, p, id, first_name, date_of_birth, genre, eyes_color):
+	def has_child_with(self, p, id, first_name, date_of_birth, genre, eyes_color = ''):
 		'''return a new baby based on parents'''
-		if p is None or not (p.get_kind() == "Adult") or not (p.get_kind() == "Senior"):
+		if p is None or not (p.get_kind() == "Adult" or p.get_kind() == "Senior"):
 			raise Exception("p is not an Adult of Senior")
 		if id < 0 or not isinstance(id, int):
 			raise Exception("id is not an integer")
@@ -300,7 +300,7 @@ class Teenager(Person):
 		if not self.can_have_child() or not p.can_have_child():
 			raise Exception("Can't have baby")
 
-		if eyes_color == None:
+		if eyes_color == '':
 			if self.get_eyes_color() == "Brown" or p.get_eyes_color() == "Brown":
 				eyes_color = "Brown"
 			elif self.get_eyes_color() == "Blue" and p.get_eyes_color() == "Blue":
@@ -382,9 +382,9 @@ class Adult(Person):
 		'''return true if person can have child'''
 		return isinstance(self, Adult)
 
-	def has_child_with(self, p, id, first_name, date_of_birth, genre, eyes_color):
+	def has_child_with(self, p, id, first_name, date_of_birth, genre, eyes_color = ''):
 		'''return a new baby based on parents'''
-		if p is None or not (p.get_kind() == "Adult") or not (p.get_kind() == "Senior"):
+		if p is None or not (p.get_kind() == "Adult" or p.get_kind() == "Senior"):
 			raise Exception("p is not an Adult of Senior")
 		if id < 0 or not isinstance(id, int):
 			raise Exception("id is not an integer")
@@ -397,7 +397,7 @@ class Adult(Person):
 		if not self.can_have_child() or not p.can_have_child():
 			raise Exception("Can't have baby")
 
-		if eyes_color == None:
+		if eyes_color == '':
 			if self.get_eyes_color() == "Brown" or p.get_eyes_color() == "Brown":
 				eyes_color = "Brown"
 			elif self.get_eyes_color() == "Blue" and p.get_eyes_color() == "Blue":
@@ -406,6 +406,10 @@ class Adult(Person):
 				eyes_color = "Green"
 			elif self.get_eyes_color() == "Blue" and p.get_eyes_color() == "Green":
 				eyes_color = "Blue"
+			elif self.get_eyes_color() == "Green" and p.get_eyes_color() == "Blue":
+				eyes_color = "Blue"
+			else:
+				eyes_color = "Black"
 
 		b = Baby(id, first_name, date_of_birth, genre, eyes_color)
 		b.last_name = self.last_name
@@ -479,9 +483,9 @@ class Senior(Person):
 		'''return true if person can have child'''
 		return isinstance(self, Adult)
 
-	def has_child_with(self, p, id, first_name, date_of_birth, genre, eyes_color):
+	def has_child_with(self, p, id, first_name, date_of_birth, genre, eyes_color = ''):
 		'''return a new baby based on parents'''
-		if p is None or not (p.get_kind() == "Adult") or not (p.get_kind() == "Senior"):
+		if p is None or not (p.get_kind() == "Adult" or p.get_kind() == "Senior"):
 			raise Exception("p is not an Adult of Senior")
 		if id < 0 or not isinstance(id, int):
 			raise Exception("id is not an integer")
@@ -494,7 +498,7 @@ class Senior(Person):
 		if not self.can_have_child() or not p.can_have_child():
 			raise Exception("Can't have baby")
 
-		if eyes_color == None:
+		if eyes_color == '':
 			if self.get_eyes_color() == "Brown" or p.get_eyes_color() == "Brown":
 				eyes_color = "Brown"
 			elif self.get_eyes_color() == "Blue" and p.get_eyes_color() == "Blue":
