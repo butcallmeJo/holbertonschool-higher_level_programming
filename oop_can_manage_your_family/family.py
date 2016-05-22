@@ -67,6 +67,10 @@ class Person():
 		'''read name of func'''
 		return self.__id
 
+	def get_eyes_color(self):
+		'''read name of func'''
+		return self.__eyes_color
+
 	def json(self):
 		'''returns a dictionary of key value pairs'''
 		dicc = {
@@ -196,10 +200,18 @@ class Baby(Person):
 			raise Exception("date_of_birth is not a valid date")
 		if not isinstance(genre, str) or genre not in self.GENRES:
 			raise Exception("genre is not valid")
-		if not isinstance(eyes_color, str) or eyes_color not in self.EYES_COLORS:
-			raise Exception("eyes_color is not valid")
 		if not self.can_have_child() or not p.can_have_child():
 			raise Exception("Can't have baby")
+
+		if eyes_color == None:
+			if self.get_eyes_color() == "Brown" or p.get_eyes_color() == "Brown":
+				eyes_color = "Brown"
+			elif self.get_eyes_color() == "Blue" and p.get_eyes_color() == "Blue":
+				eyes_color = "Blue"
+			elif self.get_eyes_color() == "Green" and p.get_eyes_color() == "Green":
+				eyes_color = "Green"
+			elif self.get_eyes_color() == "Blue" and p.get_eyes_color() == "Green":
+				eyes_color = "Blue"
 
 		b = Baby(id, first_name, date_of_birth, genre, eyes_color)
 		b.last_name = self.last_name
@@ -285,10 +297,18 @@ class Teenager(Person):
 			raise Exception("date_of_birth is not a valid date")
 		if not isinstance(genre, str) or genre not in self.GENRES:
 			raise Exception("genre is not valid")
-		if not isinstance(eyes_color, str) or eyes_color not in self.EYES_COLORS:
-			raise Exception("eyes_color is not valid")
 		if not self.can_have_child() or not p.can_have_child():
 			raise Exception("Can't have baby")
+
+		if eyes_color == None:
+			if self.get_eyes_color() == "Brown" or p.get_eyes_color() == "Brown":
+				eyes_color = "Brown"
+			elif self.get_eyes_color() == "Blue" and p.get_eyes_color() == "Blue":
+				eyes_color = "Blue"
+			elif self.get_eyes_color() == "Green" and p.get_eyes_color() == "Green":
+				eyes_color = "Green"
+			elif self.get_eyes_color() == "Blue" and p.get_eyes_color() == "Green":
+				eyes_color = "Blue"
 
 		b = Baby(id, first_name, date_of_birth, genre, eyes_color)
 		b.last_name = self.last_name
@@ -374,10 +394,18 @@ class Adult(Person):
 			raise Exception("date_of_birth is not a valid date")
 		if not isinstance(genre, str) or genre not in self.GENRES:
 			raise Exception("genre is not valid")
-		if not isinstance(eyes_color, str) or eyes_color not in self.EYES_COLORS:
-			raise Exception("eyes_color is not valid")
 		if not self.can_have_child() or not p.can_have_child():
 			raise Exception("Can't have baby")
+
+		if eyes_color == None:
+			if self.get_eyes_color() == "Brown" or p.get_eyes_color() == "Brown":
+				eyes_color = "Brown"
+			elif self.get_eyes_color() == "Blue" and p.get_eyes_color() == "Blue":
+				eyes_color = "Blue"
+			elif self.get_eyes_color() == "Green" and p.get_eyes_color() == "Green":
+				eyes_color = "Green"
+			elif self.get_eyes_color() == "Blue" and p.get_eyes_color() == "Green":
+				eyes_color = "Blue"
 
 		b = Baby(id, first_name, date_of_birth, genre, eyes_color)
 		b.last_name = self.last_name
@@ -463,10 +491,18 @@ class Senior(Person):
 			raise Exception("date_of_birth is not a valid date")
 		if not isinstance(genre, str) or genre not in self.GENRES:
 			raise Exception("genre is not valid")
-		if not isinstance(eyes_color, str) or eyes_color not in self.EYES_COLORS:
-			raise Exception("eyes_color is not valid")
 		if not self.can_have_child() or not p.can_have_child():
 			raise Exception("Can't have baby")
+
+		if eyes_color == None:
+			if self.get_eyes_color() == "Brown" or p.get_eyes_color() == "Brown":
+				eyes_color = "Brown"
+			elif self.get_eyes_color() == "Blue" and p.get_eyes_color() == "Blue":
+				eyes_color = "Blue"
+			elif self.get_eyes_color() == "Green" and p.get_eyes_color() == "Green":
+				eyes_color = "Green"
+			elif self.get_eyes_color() == "Blue" and p.get_eyes_color() == "Green":
+				eyes_color = "Blue"
 
 		b = Baby(id, first_name, date_of_birth, genre, eyes_color)
 		b.last_name = self.last_name
