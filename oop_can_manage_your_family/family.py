@@ -176,6 +176,7 @@ class Baby(Person):
 			raise Exception("Can't have baby")
 
 		b = Baby(id, first_name, date_of_birth, genre, eyes_color)
+		b.last_name = self.last_name
 		if id not in self.children:
 			self.children.append(id)
 		if id not in p.children:
@@ -185,7 +186,7 @@ class Baby(Person):
 	def adopt_child(self, c):
 		if self is None or not isinstance(self, Adult) or not isinstance(self, Senior):
 			raise Exception("Can't adopt child")
-		else:
+		elif c.get_id() not in self.children:
 			self.children.append(c.get_id())
 
 class Teenager(Person):
@@ -251,6 +252,7 @@ class Teenager(Person):
 			raise Exception("Can't have baby")
 
 		b = Baby(id, first_name, date_of_birth, genre, eyes_color)
+		b.last_name = self.last_name
 		if id not in self.children:
 			self.children.append(id)
 		if id not in p.children:
@@ -260,7 +262,7 @@ class Teenager(Person):
 	def adopt_child(self, c):
 		if self is None or not isinstance(self, Adult) or not isinstance(self, Senior):
 			raise Exception("Can't adopt child")
-		else:
+		elif c.get_id() not in self.children:
 			self.children.append(c.get_id())
 
 class Adult(Person):
@@ -326,6 +328,7 @@ class Adult(Person):
 			raise Exception("Can't have baby")
 
 		b = Baby(id, first_name, date_of_birth, genre, eyes_color)
+		b.last_name = self.last_name
 		if id not in self.children:
 			self.children.append(id)
 		if id not in p.children:
@@ -335,7 +338,7 @@ class Adult(Person):
 	def adopt_child(self, c):
 		if not self.can_have_child():
 			raise Exception("Can't adopt child")
-		else:
+		elif c.get_id() not in self.children:
 			self.children.append(c.get_id())
 
 class Senior(Person):
@@ -401,6 +404,7 @@ class Senior(Person):
 			raise Exception("Can't have baby")
 
 		b = Baby(id, first_name, date_of_birth, genre, eyes_color)
+		b.last_name = self.last_name
 		if id not in self.children:
 			self.children.append(id)
 		if id not in p.children:
@@ -410,7 +414,7 @@ class Senior(Person):
 	def adopt_child(self, c):
 		if self is None or not isinstance(self, Adult) or not isinstance(self, Senior):
 			raise Exception("Can't adopt child")
-		else:
+		elif c.get_id() not in self.children:
 			self.children.append(c.get_id())
 
 '''
