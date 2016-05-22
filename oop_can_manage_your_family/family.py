@@ -9,8 +9,7 @@ class Person():
 	GENRES = ["Female", "Male"]
 
 	def __init__(self, id, first_name, date_of_birth, genre, eyes_color):
-
-		# TODO error checking
+		'''init func for class Person. init variables and handles errors'''
 		if id < 0 or not isinstance(id, int):
 			raise Exception("id is not an integer")
 		if first_name == None or not isinstance(first_name, str):
@@ -33,35 +32,43 @@ class Person():
 		self.children = []
 
 	def __del__(self):
+		'''iono'''
 		pass
 
 	def get_first_name(self):
+		'''read name of func'''
 		return self.__first_name
 
 	def __str__(self):
+		'''prints first and last name'''
 		return self.__first_name + " " + self.last_name
 
 	def is_male(self):
+		'''read name of func'''
 		if self.__genre == "Male":
 			return True
 		else:
 			return False
 
 	def age(self):
+		'''returns age of person'''
 		# today = 5/20/2016...[5,20,2016]
 		age_var = 2016-self.__date_of_birth[2] - ((5, 20) < (self.__date_of_birth[0], self.__date_of_birth[1]))
 		return age_var
 
 	def get_kind(self):
+		'''returns wether person is adult, senior, teen or baby'''
 		if self.kind != None:
 			return self.kind
 		else:
 			return self.__class__.__name__
 
 	def get_id(self):
+		'''read name of func'''
 		return self.__id
 
 	def json(self):
+		'''returns a dictionary of key value pairs'''
 		dicc = {
 			'id': self.__id,
 			'first_name': self.__first_name,
@@ -76,6 +83,7 @@ class Person():
 		return dicc
 
 	def load_from_json(self, json):
+		'''read name of func'''
 		if not isinstance(json, dict):
 			raise Exception("json is not valid")
 		self.__id = json['id']
@@ -91,21 +99,27 @@ class Person():
 
 
 	def __gt__(self, other):
+		'''overloads cmp operators to compare ages of people'''
 		return self.age() > other.age()
 
 	def __lt__(self, other):
+		'''overloads cmp operators to compare ages of people'''
 		return self.age() < other.age()
 
 	def __ge__(self, other):
+		'''overloads cmp operators to compare ages of people'''
 		return self.age() >= other.age()
 
 	def __le__(self, other):
+		'''overloads cmp operators to compare ages of people'''
 		return self.age() <= other.age()
 
 	def __eq__(self, other):
+		'''overloads cmp operators to compare ages of people'''
 		return self.age() == other.age()
 
 	def __ne__(self, other):
+		'''overloads cmp operators to compare ages of people'''
 		return self.age() != other.age()
 
 
@@ -117,36 +131,45 @@ class Baby(Person):
 	"""docstring for Baby"""
 
 	def __init__(self, id, first_name, date_of_birth, genre, eyes_color):
+		'''init func for class Baby. init variables'''
 		Person.__init__(self, id, first_name, date_of_birth, genre, eyes_color)
 
 	def __del__(self):
+		'''read name of func'''
 		pass
 
 	def can_run(self):
+		'''returns true if person can run'''
 		return isinstance(self, Teenager) or isinstance(self, Adult)
 
 	def need_help(self):
+		'''return true if person need_help'''
 		return isinstance(self, Baby) or isinstance(self, Senior)
 
 	def is_young(self):
+		'''return true if person is young'''
 		return isinstance(self, Teenager) or isinstance(self, Baby)
 
 	def can_vote(self):
+		'''return true if person can vote'''
 		return isinstance(self, Senior) or isinstance(self, Adult)
 
 	def can_be_married(self):
+		'''return true if person can marry'''
 		return isinstance(self, Senior) or isinstance(self, Adult)
 
 	def is_married(self):
+		'''return true if person is married'''
 		if self.is_married_to != 0:
 			return True
 
 	def divorce(self, p):
+		'''divorces 2 persons'''
 		self.is_married_to = 0
 		p.is_married_to = 0
 
 	def just_married_with(self, p):
-		#TODO exceptions
+		'''marries two persons together, but handles errors as well'''
 		if (self.is_married_to != 0)  or (p.is_married_to !=0):
 			raise Exception("Already married")
 		if((not self.can_be_married()) or  (not p.can_be_married())):
@@ -154,12 +177,15 @@ class Baby(Person):
 		self.is_married_to = p.get_id()
 		p.is_married_to = self.get_id()
 		if not self.is_male() and p.is_male():
+			'''sets last name of female if and only if she marries a male'''
 			self.last_name = p.last_name
 
 	def can_have_child(self):
+		'''return true if person can have child'''
 		return isinstance(self, Adult)
 
 	def has_child_with(self, p, id, first_name, date_of_birth, genre, eyes_color):
+		'''return a new baby based on parents'''
 		if p is None or not (p.get_kind() == "Adult") or not (p.get_kind() == "Senior"):
 			raise Exception("p is not an Adult of Senior")
 		if id < 0 or not isinstance(id, int):
@@ -184,6 +210,7 @@ class Baby(Person):
 		return b
 
 	def adopt_child(self, c):
+		'''makes adult or senior adopt a child'''
 		if self is None or not isinstance(self, Adult) or not isinstance(self, Senior):
 			raise Exception("Can't adopt child")
 		elif c.get_id() not in self.children:
@@ -193,36 +220,45 @@ class Teenager(Person):
 	"""docstring for Teenager"""
 
 	def __init__(self, id, first_name, date_of_birth, genre, eyes_color):
+		'''init func for class Baby. init variables'''
 		Person.__init__(self, id, first_name, date_of_birth, genre, eyes_color)
 
 	def __del__(self):
+		'''read name of func'''
 		pass
 
 	def can_run(self):
+		'''returns true if person can run'''
 		return isinstance(self, Teenager) or isinstance(self, Adult)
 
 	def need_help(self):
+		'''return true if person need_help'''
 		return isinstance(self, Baby) or isinstance(self, Senior)
 
 	def is_young(self):
+		'''return true if person is young'''
 		return isinstance(self, Teenager) or isinstance(self, Baby)
 
 	def can_vote(self):
+		'''return true if person can vote'''
 		return isinstance(self, Senior) or isinstance(self, Adult)
 
 	def can_be_married(self):
+		'''return true if person can marry'''
 		return isinstance(self, Senior) or isinstance(self, Adult)
 
 	def is_married(self):
+		'''return true if person is married'''
 		if self.is_married_to != 0:
 			return True
 
 	def divorce(self, p):
+		'''divorces 2 persons'''
 		self.is_married_to = 0
 		p.is_married_to = 0
 
 	def just_married_with(self, p):
-		#TODO exceptions
+		'''marries two persons together, but handles errors as well'''
 		if (self.is_married_to != 0)  or (p.is_married_to !=0):
 			raise Exception("Already married")
 		if((not self.can_be_married()) or  (not p.can_be_married())):
@@ -230,12 +266,15 @@ class Teenager(Person):
 		self.is_married_to = p.get_id()
 		p.is_married_to = self.get_id()
 		if not self.is_male() and p.is_male():
+			'''sets last name of female if and only if she marries a male'''
 			self.last_name = p.last_name
 
 	def can_have_child(self):
+		'''return true if person can have child'''
 		return isinstance(self, Adult)
 
 	def has_child_with(self, p, id, first_name, date_of_birth, genre, eyes_color):
+		'''return a new baby based on parents'''
 		if p is None or not (p.get_kind() == "Adult") or not (p.get_kind() == "Senior"):
 			raise Exception("p is not an Adult of Senior")
 		if id < 0 or not isinstance(id, int):
@@ -260,6 +299,7 @@ class Teenager(Person):
 		return b
 
 	def adopt_child(self, c):
+		'''makes adult or senior adopt a child'''
 		if self is None or not isinstance(self, Adult) or not isinstance(self, Senior):
 			raise Exception("Can't adopt child")
 		elif c.get_id() not in self.children:
@@ -269,36 +309,45 @@ class Adult(Person):
 	"""docstring for Adult"""
 
 	def __init__(self, id, first_name, date_of_birth, genre, eyes_color):
+		'''init func for class Baby. init variables'''
 		Person.__init__(self, id, first_name, date_of_birth, genre, eyes_color)
 
 	def __del__(self):
+		'''read name of func'''
 		pass
 
 	def can_run(self):
+		'''returns true if person can run'''
 		return isinstance(self, Teenager) or isinstance(self, Adult)
 
 	def need_help(self):
+		'''return true if person need_help'''
 		return isinstance(self, Baby) or isinstance(self, Senior)
 
 	def is_young(self):
+		'''return true if person is young'''
 		return isinstance(self, Teenager) or isinstance(self, Baby)
 
 	def can_vote(self):
+		'''return true if person can vote'''
 		return isinstance(self, Senior) or isinstance(self, Adult)
 
 	def can_be_married(self):
+		'''return true if person can marry'''
 		return isinstance(self, Senior) or isinstance(self, Adult)
 
 	def is_married(self):
+		'''return true if person is married'''
 		if self.is_married_to != 0:
 			return True
 
 	def divorce(self, p):
+		'''divorces 2 persons'''
 		self.is_married_to = 0
 		p.is_married_to = 0
 
 	def just_married_with(self, p):
-		#TODO exceptions
+		'''marries two persons together, but handles errors as well'''
 		if (self.is_married_to != 0)  or (p.is_married_to !=0):
 			raise Exception("Already married")
 		if((not self.can_be_married()) or  (not p.can_be_married())):
@@ -306,88 +355,15 @@ class Adult(Person):
 		self.is_married_to = p.get_id()
 		p.is_married_to = self.get_id()
 		if not self.is_male() and p.is_male():
+			'''sets last name of female if and only if she marries a male'''
 			self.last_name = p.last_name
 
 	def can_have_child(self):
+		'''return true if person can have child'''
 		return isinstance(self, Adult)
 
 	def has_child_with(self, p, id, first_name, date_of_birth, genre, eyes_color):
-		if p is None or ((not p.get_kind() == "Adult") and ( not p.get_kind() == "Senior")):
-			raise Exception("p is not an Adult of Senior")
-		if id < 0 or not isinstance(id, int):
-			raise Exception("id is not an integer")
-		if first_name == None or not isinstance(first_name, str):
-			raise Exception("string is not a string")
-		if not ((0 < date_of_birth[0] < 13) and (0 < date_of_birth[1] < 32) and isinstance(12, int)):
-			raise Exception("date_of_birth is not a valid date")
-		if not isinstance(genre, str) or genre not in self.GENRES:
-			raise Exception("genre is not valid")
-		if not isinstance(eyes_color, str) or eyes_color not in self.EYES_COLORS:
-			raise Exception("eyes_color is not valid")
-		if not self.can_have_child() or not p.can_have_child():
-			raise Exception("Can't have baby")
-
-		b = Baby(id, first_name, date_of_birth, genre, eyes_color)
-		b.last_name = self.last_name
-		if id not in self.children:
-			self.children.append(id)
-		if id not in p.children:
-			p.children.append(id)
-		return b
-
-	def adopt_child(self, c):
-		if not self.can_have_child():
-			raise Exception("Can't adopt child")
-		elif c.get_id() not in self.children:
-			self.children.append(c.get_id())
-
-class Senior(Person):
-	"""docstring for Senior"""
-
-	def __init__(self):
-		Person.__init__(self, id, first_name, date_of_birth, genre, eyes_color)
-
-	def __del__(self):
-		pass
-
-	def can_run(self):
-		return isinstance(self, Teenager) or isinstance(self, Adult)
-
-	def need_help(self):
-		return isinstance(self, Baby) or isinstance(self, Senior)
-
-	def is_young(self):
-		return isinstance(self, Teenager) or isinstance(self, Baby)
-
-	def can_vote(self):
-		return isinstance(self, Senior) or isinstance(self, Adult)
-
-	def can_be_married(self):
-		return isinstance(self, Senior) or isinstance(self, Adult)
-
-	def is_married(self):
-		if self.is_married_to != 0:
-			return True
-
-	def divorce(self, p):
-		self.is_married_to = 0
-		p.is_married_to = 0
-
-	def just_married_with(self, p):
-		#TODO exceptions
-		if (self.is_married_to != 0)  or (p.is_married_to !=0):
-			raise Exception("Already married")
-		if((not self.can_be_married()) or  (not p.can_be_married())):
-			raise Exception("Can't be married")
-		self.is_married_to = p.get_id()
-		p.is_married_to = self.get_id()
-		if not self.is_male() and p.is_male():
-			self.last_name = p.last_name
-
-	def can_have_child(self):
-		return isinstance(self, Adult)
-
-	def has_child_with(self, p, id, first_name, date_of_birth, genre, eyes_color):
+		'''return a new baby based on parents'''
 		if p is None or not (p.get_kind() == "Adult") or not (p.get_kind() == "Senior"):
 			raise Exception("p is not an Adult of Senior")
 		if id < 0 or not isinstance(id, int):
@@ -412,6 +388,96 @@ class Senior(Person):
 		return b
 
 	def adopt_child(self, c):
+		'''makes adult or senior adopt a child'''
+		if self is None or not isinstance(self, Adult) or not isinstance(self, Senior):
+			raise Exception("Can't adopt child")
+		elif c.get_id() not in self.children:
+			self.children.append(c.get_id())
+
+class Senior(Person):
+	"""docstring for Senior"""
+
+	def __init__(self, id, first_name, date_of_birth, genre, eyes_color):
+		'''init func for class Baby. init variables'''
+		Person.__init__(self, id, first_name, date_of_birth, genre, eyes_color)
+
+	def __del__(self):
+		'''read name of func'''
+		pass
+
+	def can_run(self):
+		'''returns true if person can run'''
+		return isinstance(self, Teenager) or isinstance(self, Adult)
+
+	def need_help(self):
+		'''return true if person need_help'''
+		return isinstance(self, Baby) or isinstance(self, Senior)
+
+	def is_young(self):
+		'''return true if person is young'''
+		return isinstance(self, Teenager) or isinstance(self, Baby)
+
+	def can_vote(self):
+		'''return true if person can vote'''
+		return isinstance(self, Senior) or isinstance(self, Adult)
+
+	def can_be_married(self):
+		'''return true if person can marry'''
+		return isinstance(self, Senior) or isinstance(self, Adult)
+
+	def is_married(self):
+		'''return true if person is married'''
+		if self.is_married_to != 0:
+			return True
+
+	def divorce(self, p):
+		'''divorces 2 persons'''
+		self.is_married_to = 0
+		p.is_married_to = 0
+
+	def just_married_with(self, p):
+		'''marries two persons together, but handles errors as well'''
+		if (self.is_married_to != 0)  or (p.is_married_to !=0):
+			raise Exception("Already married")
+		if((not self.can_be_married()) or  (not p.can_be_married())):
+			raise Exception("Can't be married")
+		self.is_married_to = p.get_id()
+		p.is_married_to = self.get_id()
+		if not self.is_male() and p.is_male():
+			'''sets last name of female if and only if she marries a male'''
+			self.last_name = p.last_name
+
+	def can_have_child(self):
+		'''return true if person can have child'''
+		return isinstance(self, Adult)
+
+	def has_child_with(self, p, id, first_name, date_of_birth, genre, eyes_color):
+		'''return a new baby based on parents'''
+		if p is None or not (p.get_kind() == "Adult") or not (p.get_kind() == "Senior"):
+			raise Exception("p is not an Adult of Senior")
+		if id < 0 or not isinstance(id, int):
+			raise Exception("id is not an integer")
+		if first_name == None or not isinstance(first_name, str):
+			raise Exception("string is not a string")
+		if not ((0 < date_of_birth[0] < 13) and (0 < date_of_birth[1] < 32) and isinstance(12, int)):
+			raise Exception("date_of_birth is not a valid date")
+		if not isinstance(genre, str) or genre not in self.GENRES:
+			raise Exception("genre is not valid")
+		if not isinstance(eyes_color, str) or eyes_color not in self.EYES_COLORS:
+			raise Exception("eyes_color is not valid")
+		if not self.can_have_child() or not p.can_have_child():
+			raise Exception("Can't have baby")
+
+		b = Baby(id, first_name, date_of_birth, genre, eyes_color)
+		b.last_name = self.last_name
+		if id not in self.children:
+			self.children.append(id)
+		if id not in p.children:
+			p.children.append(id)
+		return b
+
+	def adopt_child(self, c):
+		'''makes adult or senior adopt a child'''
 		if self is None or not isinstance(self, Adult) or not isinstance(self, Senior):
 			raise Exception("Can't adopt child")
 		elif c.get_id() not in self.children:
@@ -422,6 +488,7 @@ File Methods
 '''
 
 def save_to_file(list, filename):
+	'''save a list of dictionaries to a json file'''
 	list_of_json_strs = []
 	with open(filename, 'w') as w_file:
 		for i in list:
@@ -429,6 +496,7 @@ def save_to_file(list, filename):
 		json.dump(list_of_json_strs, w_file)
 
 def load_from_file(filename):
+	'''returns a list of dictionaries coming from a json file'''
 	if not isinstance(filename, str) or not os.path.isfile(filename):
 		raise Exception("filename is not valid or doesn't exist")
 	else:
