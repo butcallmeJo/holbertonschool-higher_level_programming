@@ -30,6 +30,7 @@ class Person():
 		self.last_name = "last_name"
 		self.kind = self.__class__.__name__
 		self.is_married_to = 0
+		self.children = []
 
 	def __del__(self):
 		pass
@@ -61,27 +62,31 @@ class Person():
 		return self.__id
 
 	def json(self):
-		dicc = {'id': self.__id,
-		'first_name': self.__first_name,
-		'last_name': self.last_name,
-		'kind': self.get_kind(),
-		'genre': self.__genre,
-		'date_of_birth': self.__date_of_birth,
-		'eyes_color': self.__eyes_color,
-		'is_married_to': self.is_married_to}
+		dicc = {
+			'id': self.__id,
+			'first_name': self.__first_name,
+			'last_name': self.last_name,
+			'kind': self.get_kind(),
+			'genre': self.__genre,
+			'date_of_birth': self.__date_of_birth,
+			'eyes_color': self.__eyes_color,
+			'is_married_to': self.is_married_to,
+			'children': self.children
+			}
 		return dicc
 
 	def load_from_json(self, json):
 		if not isinstance(json, dict):
 			raise Exception("json is not valid")
-		self.__id = str(json['id'])
+		self.__id = json['id']
 		self.__first_name = str(json['first_name'])
 		self.last_name = str(json['last_name'])
 		self.kind = str(json['kind'])
 		self.__genre = str(json['genre'])
-		self.__date_of_birth = str(json['date_of_birth'])
+		self.__date_of_birth = json['date_of_birth']
 		self.__eyes_color = str(json['eyes_color'])
-		self.is_married_to = str(json['is_married_to'])
+		self.is_married_to = json['is_married_to']
+		self.children = json['children']
 
 
 
@@ -103,6 +108,10 @@ class Person():
 	def __ne__(self, other):
 		return self.age() != other.age()
 
+
+'''
+Sub-Classes
+'''
 
 class Baby(Person):
 	"""docstring for Baby"""
@@ -147,6 +156,38 @@ class Baby(Person):
 		if not self.is_male() and p.is_male():
 			self.last_name = p.last_name
 
+	def can_have_child(self):
+		return isinstance(self, Adult)
+
+	def has_child_with(self, p, id, first_name, date_of_birth, genre, eyes_color):
+		if p is None or not (p.get_kind() == "Adult") or not (p.get_kind() == "Senior"):
+			raise Exception("p is not an Adult of Senior")
+		if id < 0 or not isinstance(id, int):
+			raise Exception("id is not an integer")
+		if first_name == None or not isinstance(first_name, str):
+			raise Exception("string is not a string")
+		if not ((0 < date_of_birth[0] < 13) and (0 < date_of_birth[1] < 32) and isinstance(12, int)):
+			raise Exception("date_of_birth is not a valid date")
+		if not isinstance(genre, str) or genre not in self.GENRES:
+			raise Exception("genre is not valid")
+		if not isinstance(eyes_color, str) or eyes_color not in self.EYES_COLORS:
+			raise Exception("eyes_color is not valid")
+		if not self.can_have_child() or not p.can_have_child():
+			raise Exception("Can't have baby")
+
+		b = Baby(id, first_name, date_of_birth, genre, eyes_color)
+		if id not in self.children:
+			self.children.append(id)
+		if id not in p.children:
+			p.children.append(id)
+		return b
+
+	def adopt_child(self, c):
+		if self is None or not isinstance(self, Adult) or not isinstance(self, Senior):
+			raise Exception("Can't adopt child")
+		else:
+			self.children.append(c.get_id())
+
 class Teenager(Person):
 	"""docstring for Teenager"""
 
@@ -189,6 +230,38 @@ class Teenager(Person):
 		p.is_married_to = self.get_id()
 		if not self.is_male() and p.is_male():
 			self.last_name = p.last_name
+
+	def can_have_child(self):
+		return isinstance(self, Adult)
+
+	def has_child_with(self, p, id, first_name, date_of_birth, genre, eyes_color):
+		if p is None or not (p.get_kind() == "Adult") or not (p.get_kind() == "Senior"):
+			raise Exception("p is not an Adult of Senior")
+		if id < 0 or not isinstance(id, int):
+			raise Exception("id is not an integer")
+		if first_name == None or not isinstance(first_name, str):
+			raise Exception("string is not a string")
+		if not ((0 < date_of_birth[0] < 13) and (0 < date_of_birth[1] < 32) and isinstance(12, int)):
+			raise Exception("date_of_birth is not a valid date")
+		if not isinstance(genre, str) or genre not in self.GENRES:
+			raise Exception("genre is not valid")
+		if not isinstance(eyes_color, str) or eyes_color not in self.EYES_COLORS:
+			raise Exception("eyes_color is not valid")
+		if not self.can_have_child() or not p.can_have_child():
+			raise Exception("Can't have baby")
+
+		b = Baby(id, first_name, date_of_birth, genre, eyes_color)
+		if id not in self.children:
+			self.children.append(id)
+		if id not in p.children:
+			p.children.append(id)
+		return b
+
+	def adopt_child(self, c):
+		if self is None or not isinstance(self, Adult) or not isinstance(self, Senior):
+			raise Exception("Can't adopt child")
+		else:
+			self.children.append(c.get_id())
 
 class Adult(Person):
 	"""docstring for Adult"""
@@ -233,6 +306,38 @@ class Adult(Person):
 		if not self.is_male() and p.is_male():
 			self.last_name = p.last_name
 
+	def can_have_child(self):
+		return isinstance(self, Adult)
+
+	def has_child_with(self, p, id, first_name, date_of_birth, genre, eyes_color):
+		if p is None or ((not p.get_kind() == "Adult") and ( not p.get_kind() == "Senior")):
+			raise Exception("p is not an Adult of Senior")
+		if id < 0 or not isinstance(id, int):
+			raise Exception("id is not an integer")
+		if first_name == None or not isinstance(first_name, str):
+			raise Exception("string is not a string")
+		if not ((0 < date_of_birth[0] < 13) and (0 < date_of_birth[1] < 32) and isinstance(12, int)):
+			raise Exception("date_of_birth is not a valid date")
+		if not isinstance(genre, str) or genre not in self.GENRES:
+			raise Exception("genre is not valid")
+		if not isinstance(eyes_color, str) or eyes_color not in self.EYES_COLORS:
+			raise Exception("eyes_color is not valid")
+		if not self.can_have_child() or not p.can_have_child():
+			raise Exception("Can't have baby")
+
+		b = Baby(id, first_name, date_of_birth, genre, eyes_color)
+		if id not in self.children:
+			self.children.append(id)
+		if id not in p.children:
+			p.children.append(id)
+		return b
+
+	def adopt_child(self, c):
+		if not self.can_have_child():
+			raise Exception("Can't adopt child")
+		else:
+			self.children.append(c.get_id())
+
 class Senior(Person):
 	"""docstring for Senior"""
 
@@ -275,6 +380,42 @@ class Senior(Person):
 		p.is_married_to = self.get_id()
 		if not self.is_male() and p.is_male():
 			self.last_name = p.last_name
+
+	def can_have_child(self):
+		return isinstance(self, Adult)
+
+	def has_child_with(self, p, id, first_name, date_of_birth, genre, eyes_color):
+		if p is None or not (p.get_kind() == "Adult") or not (p.get_kind() == "Senior"):
+			raise Exception("p is not an Adult of Senior")
+		if id < 0 or not isinstance(id, int):
+			raise Exception("id is not an integer")
+		if first_name == None or not isinstance(first_name, str):
+			raise Exception("string is not a string")
+		if not ((0 < date_of_birth[0] < 13) and (0 < date_of_birth[1] < 32) and isinstance(12, int)):
+			raise Exception("date_of_birth is not a valid date")
+		if not isinstance(genre, str) or genre not in self.GENRES:
+			raise Exception("genre is not valid")
+		if not isinstance(eyes_color, str) or eyes_color not in self.EYES_COLORS:
+			raise Exception("eyes_color is not valid")
+		if not self.can_have_child() or not p.can_have_child():
+			raise Exception("Can't have baby")
+
+		b = Baby(id, first_name, date_of_birth, genre, eyes_color)
+		if id not in self.children:
+			self.children.append(id)
+		if id not in p.children:
+			p.children.append(id)
+		return b
+
+	def adopt_child(self, c):
+		if self is None or not isinstance(self, Adult) or not isinstance(self, Senior):
+			raise Exception("Can't adopt child")
+		else:
+			self.children.append(c.get_id())
+
+'''
+File Methods
+'''
 
 def save_to_file(list, filename):
 	list_of_json_strs = []
