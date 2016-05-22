@@ -138,8 +138,14 @@ class Baby(Person):
 
 	def just_married_with(self, p):
 		#TODO exceptions
+		if (self.is_married_to != 0)  or (p.is_married_to !=0):
+			raise Exception("Already married")
+		if((not self.can_be_married()) or  (not p.can_be_married())):
+			raise Exception("Can't be married")
 		self.is_married_to = p.get_id()
 		p.is_married_to = self.get_id()
+		if not self.is_male() and p.is_male():
+			self.last_name = p.last_name
 
 class Teenager(Person):
 	"""docstring for Teenager"""
@@ -175,8 +181,14 @@ class Teenager(Person):
 
 	def just_married_with(self, p):
 		#TODO exceptions
-		self.is_married_to = p.get_id
-		p.is_married_to = self.get_id
+		if (self.is_married_to != 0)  or (p.is_married_to !=0):
+			raise Exception("Already married")
+		if((not self.can_be_married()) or  (not p.can_be_married())):
+			raise Exception("Can't be married")
+		self.is_married_to = p.get_id()
+		p.is_married_to = self.get_id()
+		if not self.is_male() and p.is_male():
+			self.last_name = p.last_name
 
 class Adult(Person):
 	"""docstring for Adult"""
@@ -212,8 +224,14 @@ class Adult(Person):
 
 	def just_married_with(self, p):
 		#TODO exceptions
+		if (self.is_married_to != 0)  or (p.is_married_to !=0):
+			raise Exception("Already married")
+		if((not self.can_be_married()) or  (not p.can_be_married())):
+			raise Exception("Can't be married")
 		self.is_married_to = p.get_id()
 		p.is_married_to = self.get_id()
+		if not self.is_male() and p.is_male():
+			self.last_name = p.last_name
 
 class Senior(Person):
 	"""docstring for Senior"""
@@ -249,8 +267,14 @@ class Senior(Person):
 
 	def just_married_with(self, p):
 		#TODO exceptions
+		if (self.is_married_to != 0)  or (p.is_married_to !=0):
+			raise Exception("Already married")
+		if((not self.can_be_married()) or  (not p.can_be_married())):
+			raise Exception("Can't be married")
 		self.is_married_to = p.get_id()
 		p.is_married_to = self.get_id()
+		if not self.is_male() and p.is_male():
+			self.last_name = p.last_name
 
 def save_to_file(list, filename):
 	list_of_json_strs = []
