@@ -1,1 +1,41 @@
-[{"date_of_birth": [7, 4, 1990], "first_name": "Marc", "last_name": "Lardi", "is_married_to": "2", "eyes_color": "Brown", "genre": "Male", "id": "1", "kind": "Adult", "children": [5, 6]}, {"date_of_birth": [7, 4, 1992], "first_name": "Vanessa", "last_name": "Lardi", "is_married_to": "1", "eyes_color": "Green", "genre": "Female", "id": "2", "kind": "Adult", "children": [5, 6]}, {"date_of_birth": [5, 6, 2016], "first_name": "Monica", "last_name": "Lardi", "is_married_to": 0, "eyes_color": "Blue", "genre": "Female", "id": 5, "kind": "Baby", "children": []}, {"date_of_birth": [9, 8, 2013], "first_name": "Alfred", "last_name": "Lardi", "is_married_to": 0, "eyes_color": "Brown", "genre": "Male", "id": 6, "kind": "Baby", "children": []}]
+[{
+        "date_of_birth": [7, 4, 1990],
+        "first_name": "Marc",
+        "last_name": "Lardi",
+        "is_married_to": "2",
+        "eyes_color": "Brown",
+        "genre": "Male",
+        "id": "1",
+        "kind": "Adult",
+        "children": [5, 6]
+}, {
+        "date_of_birth": [7, 4, 1992],
+        "first_name": "Vanessa",
+        "last_name": "Lardi",
+        "is_married_to": "1",
+        "eyes_color": "Green",
+        "genre": "Female",
+        "id": "2",
+        "kind": "Adult",
+        "children": [5, 6]
+}, {
+        "date_of_birth": [5, 6, 2016],
+        "first_name": "Monica",
+        "last_name": "Lardi",
+        "is_married_to": 0,
+        "eyes_color": "Blue",
+        "genre": "Female",
+        "id": 5,
+        "kind": "Baby",
+        "children": []
+}, {
+        "date_of_birth": [9, 8, 2013],
+        "first_name": "Alfred",
+        "last_name": "Lardi",
+        "is_married_to": 0,
+        "eyes_color": "Brown",
+        "genre": "Male",
+        "id": 6,
+        "kind": "Baby",
+        "children": []
+}]
