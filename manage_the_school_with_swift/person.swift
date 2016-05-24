@@ -75,7 +75,7 @@ class School {
 
   // function to add p to the attribute list_persons
   func addStudent(p: Person) -> Bool {
-    // if p is student, add to list_persons
+    // if p is student, add to list_persons and return true
     if p is Student {
       list_persons.append(p)
       return true
@@ -85,12 +85,31 @@ class School {
   }
   // function to add p to the attribute list_persons
   func addMentor(p: Person) -> Bool {
-    // if p is mentor, add to list_persons
+    // if p is mentor, add to list_persons and return true
     if p is Mentor {
       list_persons.append(p)
       return true
     } else {
       return false
+    }
+  }
+
+  // function to return the list of Students from oldest to youngest
+  func listStudents() -> [Person] {
+    list_persons.filter($0 is Student) {
+      return $0.age < $1.age
+    }
+  }
+  // function to return the list of Mentors from oldest to youngest
+  func listMentors() -> [Person] {
+    list_persons.filter($0 is Mentor) {
+      return $0.age < $1.age
+    }
+  }
+  // function to return the list of Mentors of subject from oldest to youngest
+  func listMentorsBySubject(x) -> [Person] {
+    list_persons.filter($0 is Mentor && $0.subject is x) {
+      return $0.age < $1.age
     }
   }
 }
