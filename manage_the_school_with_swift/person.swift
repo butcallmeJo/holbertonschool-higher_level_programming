@@ -96,20 +96,45 @@ class School {
 
   // function to return the list of Students from oldest to youngest
   func listStudents() -> [Person] {
-    list_persons.filter($0 is Student) {
-      return $0.age < $1.age
+    var students: [Person] = []
+    for person in list_persons {
+      if person is Student {
+        students.append(person)
+      }
+    }
+    // return array of students already ordered
+    return students.sort {
+      $0.age < $1.age
     }
   }
   // function to return the list of Mentors from oldest to youngest
   func listMentors() -> [Person] {
-    list_persons.filter($0 is Mentor) {
-      return $0.age < $1.age
+    var mentors: [Person] = []
+    for person in list_persons {
+      if person is Mentor {
+        mentors.append(person)
+      }
+    }
+    // return array of students already ordered
+    return mentors.sort {
+      $0.age < $1.age
     }
   }
   // function to return the list of Mentors of subject from oldest to youngest
-  func listMentorsBySubject(x) -> [Person] {
-    list_persons.filter($0 is Mentor && $0.subject is x) {
-      return $0.age < $1.age
+  func listMentorsBySubject(subject: Subject) -> [Person] {
+    var mentors: [Person] = []
+    for person in list_persons {
+      if person is Mentor {
+        if let mentor = person as? Mentor {
+          if mentor.subject == subject {
+            mentors.append(mentor)
+          }
+        }
+      }
+    }
+    // return array of students already ordered
+    return mentors.sort {
+      $0.age < $1.age
     }
   }
 }
