@@ -62,3 +62,35 @@ class Student: Person, Classify {
     return true
   }
 }
+
+// class school where Person (student or mentor) can be added to
+class School {
+  var name: String
+  var list_persons: [Person]
+  // constructor
+  init(name: String) {
+    self.name = name
+    self.list_persons = []
+  }
+
+  // function to add p to the attribute list_persons
+  func addStudent(p: Person) -> Bool {
+    // if p is student, add to list_persons
+    if p is Student {
+      list_persons.append(p)
+      return true
+    } else {
+      return false
+    }
+  }
+  // function to add p to the attribute list_persons
+  func addMentor(p: Person) -> Bool {
+    // if p is mentor, add to list_persons
+    if p is Mentor {
+      list_persons.append(p)
+      return true
+    } else {
+      return false
+    }
+  }
+}
