@@ -14,10 +14,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var button_play: UIButton!
     @IBOutlet weak var textfield_number: UITextField!
     
-    @IBAction func clickPlayButton(sender: UIButton) {
-        
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -27,6 +23,17 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
+    // Mark: Actions
+    @IBAction func clickPlayButton(sender: AnyObject) {
+        let str = textfield_number.text
+        
+        let num = Int(str!)
+        
+        if num < 1 {
+            return
+        }
+        print("let's do " + String(num!) + " taps")
+    }
 }
 

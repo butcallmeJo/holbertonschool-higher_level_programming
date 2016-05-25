@@ -22,17 +22,26 @@
                             </imageView>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="Tapper" translatesAutoresizingMaskIntoConstraints="NO" id="1ta-hd-0S2">
                                 <rect key="frame" x="52" y="62" width="497" height="107"/>
+                                <gestureRecognizers/>
                             </imageView>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="playbtn" translatesAutoresizingMaskIntoConstraints="NO" id="2WX-YW-rBj">
                                 <rect key="frame" x="122" y="362" width="356" height="175"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="A8i-SR-iY0" appends="YES" id="Usp-mK-vL4"/>
+                                </connections>
                             </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="How many taps you wanted ?" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="P3a-FY-5me">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="How many taps you wanted?" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="P3a-FY-5me">
                                 <rect key="frame" x="195" y="302" width="210" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                <connections>
+                                    <action selector="test:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="mkG-6F-gDe"/>
+                                </connections>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="MGH-Z2-Tw3" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="0Xg-Nv-Zyk"/>
                             <constraint firstItem="MGH-Z2-Tw3" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3og-po-1DR"/>
@@ -46,8 +55,16 @@
                             <constraint firstItem="2WX-YW-rBj" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="xdF-5j-QW1"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="textfield_number" destination="P3a-FY-5me" id="Ke5-SF-PE2"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="A8i-SR-iY0">
+                    <connections>
+                        <action selector="clickPlayButton:" destination="BYZ-38-t0r" id="UH3-Ky-3cB"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="308" y="592"/>
         </scene>
