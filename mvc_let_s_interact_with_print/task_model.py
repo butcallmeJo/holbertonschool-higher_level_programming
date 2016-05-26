@@ -6,22 +6,22 @@ class TaskModel():
 		#TODO comments + stuff
 		if title == None or not isinstance(title, str):
 			raise Exception("string is not a string")
-
 		self.__title = title
+		self.__callback_title = lambda x: None
 
 	def __str__(self):
 		#TODO stuff
-		return self.__title 
+		return self.__title
 
 	def set_callback_title(self, func):
 		#TODO stuff
-		self.callback_title = func
+		self.__callback_title = func
 
 	def get_title(self):
 		#read name of func...
 		return self.__title
 
 	def toggle(self):
-		return title[::-1]
+		self.__title = self.__title[::-1]
 		#TODO add exemption for below \/
-		self.callback_title(self.__title)
+		self.__callback_title(self.__title)
