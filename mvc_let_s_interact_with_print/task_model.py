@@ -7,7 +7,7 @@ class TaskModel():
 		if title == None or not isinstance(title, str):
 			raise Exception("string is not a string")
 		self.__title = title
-		self.__callback_title = lambda x: None
+		self.__callback_title = []
 
 	def __str__(self):
 		#TODO stuff
