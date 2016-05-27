@@ -17,7 +17,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var label_taps: UILabel!
     
     var taps_done: Int = 0
-    var taps_requested: Int = 10
+    var taps_requested: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,21 +57,22 @@ class ViewController: UIViewController {
     
     func initGame() {
         image_tapper.hidden = true
+        textfield_number.hidden = true
         button_play.hidden = true
         label_taps.hidden = false
         button_coin.hidden = false
-        textfield_number.hidden = false
         taps_done = 0
         label_taps.text = "0 Taps"
     }
     
     func resetGame() {
         image_tapper.hidden = false
+        textfield_number.hidden = false
         button_play.hidden = false
         label_taps.hidden = true
         button_coin.hidden = true
-        textfield_number.hidden = true
         taps_requested = 0
+        taps_done = 0
     }
     
 }
