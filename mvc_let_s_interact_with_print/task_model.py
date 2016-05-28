@@ -3,18 +3,18 @@
 class TaskModel():
 	"""docstring for TaskModel"""
 	def __init__(self, title):
-		#TODO comments + stuff
+		# Basic init stuff
 		if title == None or not isinstance(title, str):
 			raise Exception("string is not a string")
 		self.__title = title
 		self.__callback_title = []
 
 	def __str__(self):
-		#TODO stuff
+		# Basic print output
 		return self.__title
 
 	def set_callback_title(self, func):
-		#TODO stuff
+		# Basic callback setter
 		self.__callback_title = func
 
 	def get_title(self):
