@@ -2,16 +2,21 @@
 class Car():
 	"""docstring for Car"""
 	def __init__(self, *args, **kwargs):
-		if not kwargs['name'] or not isinstance(kwargs['name'], str):
+		if len(args) > 0 or isinstance(args, dict):
+			init_dict = args[0]
+		else:
+			init_dict = kwargs
+
+		if not init_dict.get('name') or not isinstance(init_dict.get('name'), str):
 			raise Exception("name is not a string")
-		if not kwargs['brand'] or not isinstance(kwargs['brand'], str):
+		if not init_dict.get('brand') or not isinstance(init_dict.get('brand'), str):
 			raise Exception("brand is not a string")
-		if not kwargs['nb_doors'] or not isinstance(kwargs['nb_doors'], int) or kwargs['nb_doors'] < 1:
+		if not init_dict.get('nb_doors') or not isinstance(init_dict.get('nb_doors'), int) or init_dict['nb_doors'] < 1:
 			raise Exception("nb_doors is not > 0")
 
-		self.__name = kwargs['name']
-		self.__brand = kwargs['brand']
-		self.__nb_doors = kwargs['nb_doors']
+		self.__name = init_dict.get('name')
+		self.__brand = init_dict.get('brand')
+		self.__nb_doors = init_dict.get('nb_doors')
 
 	def __str__(self):
 		return self.__name + " " + self.__brand + " (" + str(self.__nb_doors) + ")"
