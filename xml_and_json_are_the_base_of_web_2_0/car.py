@@ -25,9 +25,13 @@ class Car():
 	def get_nb_doors(self):
 		return self.__nb_doors
 
+	def set_nb_doors(self, number):
+		self.__nb_doors = number
+
 	def to_hash(self):
 		hashed = {
 			'name': self.__name,
 			'brand': self.__brand,
 			'nb_doors': self.__nb_doors
 		}
+		return hashed
