@@ -1,3 +1,5 @@
+import json
+from xml.dom.minidom import getDOMImplementation, Document
 
 class Car():
 	"""docstring for Car"""
@@ -40,3 +42,13 @@ class Car():
 			'nb_doors': self.__nb_doors
 		}
 		return hashed
+
+	def to_json_string(self):
+		return json.dumps(self.to_hash())
+
+	def to_xml_node(self, doc):
+		car = doc.createElement('car')
+		car.setAttribute('nb_doors', self.__nb_doors)
+		car.appendChild(doc)
+		name = doc.createElement('name')
+		name_content = doc.createTextNode(self.__name)
