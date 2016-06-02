@@ -58,3 +58,6 @@ class Car():
 		car.appendChild(name)
 		car.appendChild(brand)
 		return car
+
+	def to_comma(self):
+		return str(self.__name + "," + self.__brand + "," + str(self.__nb_doors))
