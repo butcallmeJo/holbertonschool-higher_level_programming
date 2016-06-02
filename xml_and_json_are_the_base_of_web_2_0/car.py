@@ -48,7 +48,13 @@ class Car():
 
 	def to_xml_node(self, doc):
 		car = doc.createElement('car')
-		car.setAttribute('nb_doors', self.__nb_doors)
-		car.appendChild(doc)
+		car.setAttribute('nb_doors', str(self.__nb_doors))
 		name = doc.createElement('name')
-		name_content = doc.createTextNode(self.__name)
+		name_content = doc.createCDATASection(self.__name)
+		brand = doc.createElement('brand')
+		brand_content = doc.createTextNode(self.__brand)
+		name.appendChild(name_content)
+		brand.appendChild(brand_content)
+		car.appendChild(name)
+		car.appendChild(brand)
+		return car
