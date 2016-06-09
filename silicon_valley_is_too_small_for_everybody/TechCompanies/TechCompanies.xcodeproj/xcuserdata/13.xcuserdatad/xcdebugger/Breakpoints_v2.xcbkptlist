@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TechCompanies/TechCompaniesListViewController.swift"
+            timestampString = "487114429.955841"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
+            landmarkName = "tableView(_:cellForRowAtIndexPath:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TechCompanies/TechCompanyDetailViewController.swift"
+            timestampString = "487115647.484186"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "11"
+            endingLineNumber = "11"
+            landmarkName = "TechCompanyDetailViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TechCompanies.TechCompanyDetailViewController.init (nibName : Swift.Optional&lt;Swift.String&gt;, bundle : Swift.Optional&lt;__ObjC.NSBundle&gt;) -&gt; TechCompanies.TechCompanyDetailViewController"
+                  moduleName = "TechCompanies"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/13/Documents/holbertonschool-higher_level_programming/silicon_valley_is_too_small_for_everybody/TechCompanies/TechCompanies/TechCompanyDetailViewController.swift"
+                  timestampString = "487187238.248845"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "58">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TechCompanies.TechCompanyDetailViewController.init (coder : __ObjC.NSCoder) -&gt; Swift.Optional&lt;TechCompanies.TechCompanyDetailViewController&gt;"
+                  moduleName = "TechCompanies"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/13/Documents/holbertonschool-higher_level_programming/silicon_valley_is_too_small_for_everybody/TechCompanies/TechCompanies/TechCompanyDetailViewController.swift"
+                  timestampString = "487187238.24895"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "19">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
