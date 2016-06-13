@@ -1,6 +1,7 @@
 import sys
 import peewee
 from models import *
+from actions import *
 
 action_list = ["create", "print", "insert", "delete"]
 table_list = ["school", "batch", "student"]
