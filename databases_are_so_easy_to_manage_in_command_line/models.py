@@ -40,3 +40,19 @@ class Student(User):
 
 	def __str__(self):
 		return "Student: " + self.first_name + " " + self.last_name + " (" + str(self.id) + ")" + " part of the batch: " + str(self.batch)
+
+class Exercise(BaseModel):
+	"""docstring for Exercise"""
+	SUBJECTS = [
+		('math', "Math"),
+		('english', "English"),
+		('history', "History"),
+		('c_prog', "C prog"),
+		('swift_prog', "Swift prog")
+	]
+	student = pw.ForeignKeyField(Student, related_name="exercises", on_delete='CASCADE')
+	subject = pw.CharField(128, choices=SUBJECTS)
+	note = pw.IntegerField(default=0)
+
+	def __str__(self):
+		return "Exercise: " + str(self.student) + " has " + str(self.note) + " in " + self.subject + " (" + str(self.id) + ")"

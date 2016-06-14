@@ -3,15 +3,156 @@ import peewee
 from models import *
 from actions import *
 
-action_list = ["create", "print", "insert", "delete", "print_batch_by_school", "print_student_by_batch", "print_student_by_school", "print_family", "age_average", "change_batch", "print_all"]
-table_list = ["school", "batch", "student"]
+action_list = ["create", "print", "insert", "delete", "print_batch_by_school", "print_student_by_batch", "print_student_by_school", "print_family", "age_average", "change_batch", "print_all", "note_average_by_student", "note_average_by_batch", "note_average_by_school", "top_batch", "top_school"]
+table_list = ["school", "batch", "student", "exercise"]
 models = {
 	'school': School,
 	'batch': Batch,
 	'user': User,
-	'student': Student
+	'student': Student,
+	'exercise': Exercise
 }
 
+#
+def top_school(*args, **kwargs):
+	def top_school_subject(subject, school_id):
+		best = None
+		best_score = -1
+		batches = Batch.select().where(Batch.school == school_id)
+		if not batches:
+			print "No batches in school"
+			return
+		for batch in batches:
+			students = Student.select().where(Student.batch == batch)
+			for student in students:
+				total = 0
+				count = 0
+				for ex in Exercise.select().where(Exercise.student == student, Exercise.subject == subject[1]):
+					total += ex.note
+					count += 1
+				if count == 0:
+					count += 1
+				avg = total/float(count)
+				if avg > best_score:
+					best = student
+					best_score = avg
+		return (best_score, str(best))
+
+	if len(sys.argv) <= 2:
+		raise Exception("Too few arguments for `top_school`")
+	school_id = sys.argv[2]
+	if not School.select().where(School.id == school_id):
+		print "School not found"
+		return
+	if len(sys.argv) > 3:
+		subject = sys.argv[3]
+		best = top_school_subject(subject, school_id)
+		if best:
+			print best[1]
+	else:
+		winners = []
+		for subject in Exercise.SUBJECTS:
+			best = top_school_subject(subject, school_id)
+			if best:
+				winners.append(best)
+		best = max(winners, key=lambda x: x[0])
+		if best:
+			print best[1]
+
+#
+def top_batch(*args, **kwargs):
+	def top_batch_subject(subject, batch_id):
+		best = None
+		best_score = -1
+		students = Student.select().where(Student.batch == batch_id)
+		if not students:
+			print "No students in batch"
+			return
+		for student in students:
+			total = 0
+			count = 0
+			for ex in Exercise.select().where(Exercise.student == student, Exercise.subject == subject[1]):
+				total += ex.note
+				count += 1
+			if count == 0:
+				count += 1
+			avg = total/float(count)
+			if avg > best_score:
+				best = student
+				best_score = avg
+		return (best_score, str(best))
+
+	if len(sys.argv) <= 2:
+		raise Exception("Too few arguments for `top_batch`")
+	batch_id = sys.argv[2]
+	if not Batch.select().where(Batch.id == batch_id):
+		print "Batch not found"
+		return
+	if len(sys.argv) > 3:
+		subject = sys.argv[3]
+		best = top_batch_subject(subject, batch_id)
+		if best:
+			print best[1]
+	else:
+		winners = []
+		for subject in Exercise.SUBJECTS:
+			best = top_batch_subject(subject, batch_id)
+			if best:
+				winners.append(best)
+		best = max(winners, key=lambda x: x[0])
+		if best:
+			print best[1]
+
+#
+def note_average_by_school():
+	school_id = sys.argv[2]
+	if not School.select().where(School.id == school_id):
+		print "School not found"
+		return
+	for subject in Exercise.SUBJECTS:
+		total = 0
+		count = 0
+		for batch in Batch.select().where(Batch.school == school_id):
+			for student in Student.select().where(Student.batch == batch):
+				for ex in Exercise.select().where(Exercise.student == student, Exercise.subject == subject[1]):
+					total += ex.note
+					count += 1
+		if count == 0:
+			continue;
+		print str(subject[1]) + ": " + str(total/float(count))
+
+#
+def note_average_by_batch():
+	try:
+		batch_id = sys.argv[2]
+		for subject in Exercise.SUBJECTS:
+			note_sum = 0
+			nb_notes = 0
+			for student in Student.select().where(Student.batch==batch_id):
+				for exercise in Exercise.select().where(Exercise.student==student, Exercise.subject==subject[1]):
+					note_sum += exercise.note
+					nb_notes += 1
+			if nb_notes == 0:
+				continue;
+			print str(subject[1]) + ": " + str(note_sum/float(nb_notes))
+	except:
+		print "Batch not found"
+
+#
+def note_average_by_student():
+	try:
+		stu_id = sys.argv[2]
+		for subject in Exercise.SUBJECTS:
+			note_sum = 0
+			nb_notes = 0
+			for exercise in Exercise.select().where(Exercise.student==stu_id, Exercise.subject==subject[1]):
+				note_sum += exercise.note
+				nb_notes += 1
+			if nb_notes == 0:
+				continue;
+			print str(subject[1]) + ": " + str(note_sum/nb_notes)
+	except:
+		print "Student not found"
 #
 def print_all():
 	for school in School.select():
@@ -20,6 +161,8 @@ def print_all():
 			print "\t", batch
 			for student in batch.students:
 				print "\t\t", student
+				for exercise in student.exercises:
+					print "\t\t\t", exercise
 
 #
 def change_batch():
@@ -115,7 +258,12 @@ def insert_model():
 			)
 		else:
 			print "error: insert batch usage: insert batch <school id> <name>"
-
+	elif sys.argv[2] == "exercise":
+		obj = Exercise.create(
+			student=sys.argv[3],
+			subject=sys.argv[4],
+			note=sys.argv[5]
+		)
 	print "New " + sys.argv[2] + ": ", obj
 
 #
@@ -142,7 +290,7 @@ elif len(sys.argv) > 1 and sys.argv[1] not in action_list:
 #
 elif sys.argv[1] == "create":
 	my_models_db.connect()
-	my_models_db.create_tables([BaseModel, School, Batch, User, Student])
+	my_models_db.create_tables([BaseModel, School, Batch, User, Student, Exercise])
 #
 elif sys.argv[1] == "print":
 	if len(sys.argv) < 3:
@@ -156,6 +304,8 @@ elif sys.argv[1] == "print":
 			print_table(Batch)
 		elif sys.argv[2] == "student":
 			print_table(Student)
+		elif sys.argv[2] == "exercise":
+			print_table(Exercise)
 #
 elif sys.argv[1] == "insert":
 	if len(sys.argv) < 3:
@@ -214,3 +364,33 @@ elif sys.argv[1] == "print_all":
 		print "error: print_all usage: no args..."
 	else:
 		print_all()
+#
+elif sys.argv[1] == "note_average_by_student":
+	if len(sys.argv) != 3:
+		print "error: note_average_by_student usage: <student id>"
+	else:
+		note_average_by_student()
+#
+elif sys.argv[1] == "note_average_by_batch":
+	if len(sys.argv) != 3:
+		print "error: note_average_by_batch usage: <batch id>"
+	else:
+		note_average_by_batch()
+#
+elif sys.argv[1] == "note_average_by_school":
+	if len(sys.argv) != 3:
+		print "error: note_average_by_school usage: <school id>"
+	else:
+		note_average_by_school()
+#
+elif sys.argv[1] == "top_batch":
+	if len(sys.argv) < 3:
+		print "error: action_top_batch usage: <batch id> (<subject>)"
+	else:
+		top_batch()
+#
+elif sys.argv[1] == "top_school":
+	if len(sys.argv) < 3:
+		print "error: action_top_school usage: <school id> (<subject>)"
+	else:
+		top_school()
