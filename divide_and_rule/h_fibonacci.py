@@ -16,4 +16,4 @@ class FibonacciThread(threading.Thread):
 		for i in range(self.number):
 			(first, second) = (second, first + second)
 
-		print "" + str(self.number) + " => " + str(first) + ""
+		print str(self.number) + " => " + str(first)
